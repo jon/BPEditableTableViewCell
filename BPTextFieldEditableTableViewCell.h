@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "BPEditableTableViewCell.h"
 
 @interface BPTextFieldEditableTableViewCell : BPEditableTableViewCell {
 
