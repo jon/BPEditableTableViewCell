@@ -10,11 +10,24 @@
 
 @interface BPEditableTableViewCell : UITableViewCell {
 	UIControl *control;
+	
+	id delegate;
 }
 
 @property (readonly) UIControl *control;
 @property (copy) id value;
 
+@property (assign) id delegate;
+
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier;
+- (id)initWithLabel:(NSString *)label reuseIdentifier:(NSString *)reuseIdentifier;
 
 @end
+
+@interface NSObject (BPEditableTableViewCellDelegate)
+
+- (void)editableTableViewCell:(BPEditableTableViewCell *)cell didUpdateValue:(id)value;
+- (BOOL)editableTableViewCellShouldReturn:(BPEditableTableViewCell *)cell;
+
+@end
+

@@ -22,6 +22,16 @@
 	if (self = [super initWithReuseIdentifier:reuseIdentifier]) {
 		self.textField.textColor = [UIColor colorWithRed:0.22 green:0.33 blue:0.53 alpha:1];
 		self.textField.font = [UIFont systemFontOfSize:15.0];
+		self.textField.delegate = self;
+		[self.textField addTarget:self action:@selector(textFieldValueChanged:) forControlEvents:UIControlEventValueChanged];
+	}
+	
+	return self;
+}
+
+- (id)initWithLabel:(NSString *)label placeholder:(NSString *)placeholder reuseIdentifier:(NSString *)reuseIdentifier {
+	if (self = [self initWithLabel:label reuseIdentifier:reuseIdentifier]) {
+		self.textField.placeholder = placeholder;
 	}
 	
 	return self;
@@ -43,6 +53,24 @@
 
 - (void)setValue:(id)aValue {
 	self.textField.text = [[aValue copy] autorelease];
+}
+
+#pragma mark -
+#pragma mark Control events
+
+- (IBAction)textFieldValueChanged:(id)sender {
+	if ([delegate respondsToSelector:@selector(editableTableViewCell:didUpdateValue:)])
+		[delegate editableTableViewCell:self didUpdateValue:[self value]];
+}
+
+
+#pragma mark -
+#pragma mark UITextFieldDelegate implementation
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+	if ([delegate respondsToSelector:@selector(editableTableViewCellShouldReturn:)])
+		return [delegate editableTableViewCellShouldReturn:self];
+	return YES;
 }
 
 @end

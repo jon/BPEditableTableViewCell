@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "BPEditableTableViewCell.h"
 
-@interface BPTextFieldEditableTableViewCell : BPEditableTableViewCell {
+@interface BPTextFieldEditableTableViewCell : BPEditableTableViewCell <UITextFieldDelegate> {
 
 }
 
 @property (readonly) UITextField *textField;
+
+- (id)initWithLabel:(NSString *)label placeholder:(NSString *)placeholder reuseIdentifier:(NSString *)reuseIdentifier;
 
 @end

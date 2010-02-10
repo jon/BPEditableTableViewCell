@@ -31,10 +31,23 @@
 	return self;
 }
 
+- (id)initWithLabel:(NSString *)label reuseIdentifier:(NSString *)reuseIdentifier {
+	if (self = [self initWithReuseIdentifier:reuseIdentifier]) {
+		self.textLabel.text = label;
+	}
+	
+	return self;
+}
+
 - (void)dealloc {
 	[control release];
     [super dealloc];
 }
+
+#pragma mark -
+#pragma mark Accessors
+
+@synthesize delegate;
 
 #pragma mark -
 #pragma mark Value accessor stubs
