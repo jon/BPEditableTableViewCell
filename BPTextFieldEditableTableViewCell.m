@@ -23,7 +23,6 @@
 		self.textField.textColor = [UIColor colorWithRed:0.22 green:0.33 blue:0.53 alpha:1];
 		self.textField.font = [UIFont systemFontOfSize:15.0];
 		self.textField.delegate = self;
-		[self.textField addTarget:self action:@selector(textFieldValueChanged:) forControlEvents:UIControlEventValueChanged];
 	}
 	
 	return self;
@@ -54,15 +53,6 @@
 - (void)setValue:(id)aValue {
 	self.textField.text = [[aValue copy] autorelease];
 }
-
-#pragma mark -
-#pragma mark Control events
-
-- (IBAction)textFieldValueChanged:(id)sender {
-	if ([delegate respondsToSelector:@selector(editableTableViewCell:didUpdateValue:)])
-		[delegate editableTableViewCell:self didUpdateValue:[self value]];
-}
-
 
 #pragma mark -
 #pragma mark UITextFieldDelegate implementation

@@ -24,6 +24,9 @@
 		Class controlClass = [[self class] controlClass];
 		control = [[controlClass alloc] initWithFrame:CGRectZero];
 		control.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        
+        [control addTarget:self action:@selector(valueChanged:) forControlEvents:UIControlEventValueChanged];
+        
 		[self.contentView addSubview:control];
 		[self setNeedsLayout];
 	}
@@ -84,6 +87,14 @@
 	self.textLabel.frame = labelFrame;
 	self.control.frame = CGRectMake(labelFrame.size.width > 0 ? labelFrame.size.width + 20 : 10, 13, self.frame.size.width - labelFrame.size.width - 45, 21);
 	[self.detailTextLabel removeFromSuperview];
+}
+
+#pragma mark -
+#pragma mark Value changes
+
+- (IBAction)valueChanged:(UIControl *)sender {
+    if ([delegate respondsToSelector:@selector(editableTableViewCell:didUpdateValue:)])
+        [delegate editableTableViewCell:self didUpdateValue:self.value];
 }
 
 @end
