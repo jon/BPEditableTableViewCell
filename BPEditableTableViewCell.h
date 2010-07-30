@@ -11,10 +11,13 @@
 @interface BPEditableTableViewCell : UITableViewCell {
 	UIControl *control;
 	
+    BOOL disabledWhenNotEditing;
+    
 	id delegate;
 }
 
 @property (readonly) UIControl *control;
+@property (assign) BOOL disabledWhenNotEditing;
 @property (copy) id value;
 
 @property (assign) id delegate;

@@ -51,6 +51,7 @@
 #pragma mark Accessors
 
 @synthesize delegate;
+@synthesize disabledWhenNotEditing;
 
 #pragma mark -
 #pragma mark Value accessor stubs
@@ -67,7 +68,7 @@
 #pragma mark Editing
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
-	[self control].enabled = editing;
+	[self control].enabled = !disabledWhenNotEditing || editing;
 }
 
 #pragma mark -
